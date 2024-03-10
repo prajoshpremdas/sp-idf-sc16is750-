@@ -1,8 +1,8 @@
-#include <stdio.h>	
+#include <stdio.h>
 #include <inttypes.h>
 #include <stdint.h>
-#include <stdbool.h>	
-#include <stdlib.h>  
+#include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "freertos/FreeRTOS.h"
@@ -36,6 +36,8 @@
 #define SPI_FREQ 1000000 // SC16IS75x supports 4 Mbit/s maximum SPI clock speed
 
 #define TAG "SC16IS752"
+
+//#define SC16IS750_DEBUG_PRINT
 
 void SC16IS750_init(SC16IS750_t * dev, uint8_t protocol, uint8_t address, int channels)
 {
@@ -99,7 +101,7 @@ void SC16IS750_spi(SC16IS750_t * dev, int16_t mosi, int16_t miso, int16_t sclk)
 #if 0
 		.flags = SPI_DEVICE_NO_DUMMY,
 #endif
-		.queue_size = 7 
+		.queue_size = 7
 	};
 
 	spi_device_handle_t handle;
@@ -332,11 +334,11 @@ int16_t SC16IS750_SetBaudrate(SC16IS750_t * dev, uint8_t channel, uint32_t baudr
 
 #ifdef	SC16IS750_DEBUG_PRINT
 	printf("Desired baudrate: ");
-	printf("%x\n", baudrate);
+	printf("%ld\n", baudrate);
 	printf("Calculated divisor: ");
 	printf("%x\n", divisor);
 	printf("Actual baudrate: ");
-	printf("%x\n", actual_baudrate);
+	printf("%ld\n", actual_baudrate);
 	printf("Baudrate error: ");
 	printf("%x\n", error);
 #endif
